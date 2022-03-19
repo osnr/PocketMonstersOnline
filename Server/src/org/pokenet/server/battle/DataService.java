@@ -133,9 +133,9 @@ public class DataService {
 			return;
 		}
 		for (int i = 0; i < 493; i++) {
-			Ini.Section s = ini.get(String.valueOf(i+1));
+                    Ini.Section s = (Ini.Section) ini.get(String.valueOf(i+1));
             PokemonSpecies species = null;
-            String name = s.get("InternalName");
+            String name = (String) s.get("InternalName");
             if(name.equalsIgnoreCase("NIDORANfE")) {
             	name = "Nidoran-f";
             	species = m_speciesData.getPokemonByName(name);
@@ -165,7 +165,7 @@ public class DataService {
             	species = m_speciesData.getPokemonByName(name);
                 initialisePokemon(species, s);
             } else {
-            	name = s.get("Name");
+            	name = (String) s.get("Name");
                 species = m_speciesData.getPokemonByName(name);
                 initialisePokemon(species, s);
             }
@@ -180,8 +180,8 @@ public class DataService {
 		Iterator<String> iterator = ini.keySet().iterator();
 		while(iterator.hasNext()) {
 			String tm = (String) iterator.next();
-			Ini.Section s = ini.get(tm);
-			String [] pokemons = s.get("POKEMON").split(",");
+			Ini.Section s = (Ini.Section) ini.get(tm);
+			String [] pokemons = ((String) s.get("POKEMON")).split(",");
 			for(int i = 0; i < pokemons.length; i++) {
 				PokemonSpecies species = m_speciesData.getPokemonByName(pokemons[i]);
 				if(species != null) {
@@ -257,11 +257,11 @@ public class DataService {
 	 */
 	private void initialisePokemon(PokemonSpecies species, Section s) {
 		if(species != null) {
-			species.setInternalName(s.get("InternalName"));
-            species.setKind(s.get("Kind"));
-            species.setPokedexInfo(s.get("Pokedex"));
-            species.setType1(s.get("Type1"));
-            species.setType2(s.get("Type2"));
+                    species.setInternalName((String) s.get("InternalName"));
+                    species.setKind((String) s.get("Kind"));
+                    species.setPokedexInfo((String) s.get("Pokedex"));
+                    species.setType1((String) s.get("Type1"));
+                    species.setType2((String) s.get("Type2"));
             if (species.getType2() == null)
                 species.setType2("");
             PokemonType [] types;
@@ -275,40 +275,40 @@ public class DataService {
             }
             species.setType(types);
 
-            String[] stringBaseStats = s.get("BaseStats").split(",");
+            String[] stringBaseStats = ((String) s.get("BaseStats")).split(",");
             for (int j = 0; j < stringBaseStats.length; j++)
                     species.getBaseStats()[j] = 
                             Integer.parseInt(stringBaseStats[j]);
-            species.setRareness(Integer.parseInt(s.get("Rareness")));
-            species.setBaseEXP(Integer.parseInt(s.get("BaseEXP")));
-            species.setHappiness(Integer.parseInt(s.get("Happiness")));
-            species.setGrowthRate(ExpTypes.valueOf(s.get("GrowthRate").toUpperCase()));
-            species.setStepsToHatch(Integer.parseInt(s.get("StepsToHatch")));
-            species.setColor(s.get("Color"));
-            species.setHabitat(s.get("Habitat"));
+            species.setRareness(Integer.parseInt((String) s.get("Rareness")));
+            species.setBaseEXP(Integer.parseInt((String) s.get("BaseEXP")));
+            species.setHappiness(Integer.parseInt((String) s.get("Happiness")));
+            species.setGrowthRate(ExpTypes.valueOf(((String) s.get("GrowthRate")).toUpperCase()));
+            species.setStepsToHatch(Integer.parseInt((String) s.get("StepsToHatch")));
+            species.setColor((String) s.get("Color"));
+            species.setHabitat((String) s.get("Habitat"));
             if (species.getHabitat() == null)
                     species.setHabitat("");
-            String[] stringEffortPoints = s.get("EffortPoints").split(",");
+            String[] stringEffortPoints = ((String) s.get("EffortPoints")).split(",");
             for (int j = 0; j < stringEffortPoints.length; j++)
                     species.getEffortPoints()[j] = 
                             Integer.parseInt(stringEffortPoints[j]);
             String [] abilities = new String[2];
-            if(s.get("Abilities").contains(",")) {
-                String [] temp = s.get("Abilities").split(",");
+            if(((String) s.get("Abilities")).contains(",")) {
+                String [] temp = ((String) s.get("Abilities")).split(",");
                 abilities[0] = temp[0].trim();
                 abilities[1] = temp[1].trim();
             } else {
             	abilities = new String[1];
-            	abilities[0] = s.get("Abilities").trim();
+            	abilities[0] = ((String) s.get("Abilities")).trim();
             }
             species.setAbilities(abilities);
-            String[] stringCompatibility = s.get("Compatibility").split(",");
+            String[] stringCompatibility = ((String) s.get("Compatibility")).split(",");
             for (int j = 0; j < stringCompatibility.length; j++)
                     species.getCompatibility()[j] = 
                             Integer.parseInt(stringCompatibility[j]);
-            species.setHeight(Float.parseFloat(s.get("Height")));
-            species.setWeight(Float.parseFloat(s.get("Weight")));
-            String gender = s.get("GenderRate");
+            species.setHeight(Float.parseFloat((String) s.get("Height")));
+            species.setWeight(Float.parseFloat((String) s.get("Weight")));
+            String gender = (String) s.get("GenderRate");
             if(gender.equalsIgnoreCase("Female50Percent")) {
             	 species.setFemalePercentage(50);
             	 species.setGenders(PokemonSpecies.GENDER_BOTH);
@@ -332,7 +332,7 @@ public class DataService {
             	 species.setFemalePercentage(12);
             	 species.setGenders(PokemonSpecies.GENDER_BOTH);
             }
-            String[] stringMoves = s.get("Moves").split(",");
+            String[] stringMoves = ((String) s.get("Moves")).split(",");
             species.setLevelMoves(new HashMap<Integer, String>());
             String [] startMoves = new String [4];
             int sp = 0;
@@ -365,8 +365,8 @@ public class DataService {
                     }
             }
             species.setStarterMoves(startMoves);
-            species.setEggMoves(s.get("EggMoves").split(","));
-            String[] stringEvolutions = s.get("Evolutions").split(",");
+            species.setEggMoves(((String) s.get("EggMoves")).split(","));
+            String[] stringEvolutions = ((String) s.get("Evolutions")).split(",");
             
            	PokemonEvolution [] evos = new PokemonEvolution[(int) Math.ceil(stringEvolutions.length / 3.0)];
            	int ep = 0;

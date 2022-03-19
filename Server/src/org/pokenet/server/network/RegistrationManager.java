@@ -86,8 +86,8 @@ public class RegistrationManager implements Runnable {
 			 * Check if the user exists
 			 */
 			ResultSet data = m_database.query("SELECT * FROM pn_members WHERE username='" + MySqlManager.parseSQL(info[0]) + "'");
-			data.first();
-			try {				
+			try {
+                            data.first();
 				if(data != null && data.getString("username") != null && data.getString("username").equalsIgnoreCase(MySqlManager.parseSQL(info[0]))) {
 					session.resumeRead();
 					session.resumeWrite();
@@ -99,8 +99,8 @@ public class RegistrationManager implements Runnable {
 			 * Check if an account is already registered with the email
 			 */
 			data = m_database.query("SELECT * FROM pn_members WHERE email='" + MySqlManager.parseSQL(info[2]) + "'");
-			data.first();
-			try {				
+			try {
+                            data.first();
 				if(data != null && data.getString("email") != null && data.getString("email").equalsIgnoreCase(MySqlManager.parseSQL(info[2]))) {
 					session.resumeRead();
 					session.resumeWrite();

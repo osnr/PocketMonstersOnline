@@ -48,7 +48,7 @@ public class MySqlManager {
     public boolean selectDatabase(String database) {
     	try {
         	Statement stm = mysql_connection.createStatement();
-        	stm.executeQuery("USE " + database);
+        	stm.executeUpdate("USE " + database);
         	return true;
     	} catch (Exception e) {
     		e.printStackTrace();
@@ -99,7 +99,7 @@ public class MySqlManager {
             //Return the data as a resultset
             try{
                 //Execute Query
-                stmt = mysql_connection.createStatement();
+                stmt = mysql_connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 mysql_result = stmt.executeQuery(query);
             }
             catch(Exception x) {
