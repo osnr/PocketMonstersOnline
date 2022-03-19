@@ -1,0 +1,4 @@
+*.class
+Server/res/settings.txt
+Server/errors.txt
+.DS_Store
