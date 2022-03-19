@@ -131,6 +131,7 @@ CREATE TABLE  `pokenet`.`pn_members` (
   `healMapY` int(11) DEFAULT NULL,
   `isSurfing` varchar(5) DEFAULT NULL,
   `adminLevel` int(11) DEFAULT NULL,
+  `muted` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
