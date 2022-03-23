@@ -85,6 +85,14 @@ CREATE TABLE  `pokenet`.`pn_box` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- ----------------------------
+-- Table structure for pn_bans
+-- ----------------------------
+DROP TABLE IF EXISTS `pn_bans`;
+CREATE TABLE `pn_bans` (
+  `ip` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Dumping data for table `pokenet`.`pn_box`
 --
@@ -131,7 +139,8 @@ CREATE TABLE  `pokenet`.`pn_members` (
   `healMapY` int(11) DEFAULT NULL,
   `isSurfing` varchar(5) DEFAULT NULL,
   `adminLevel` int(11) DEFAULT NULL,
-  `muted` varchar(5) DEFAULT NULL,
+  `muted` varchar(5) DEFAULT '0',
+  `party` int(11) DEFAULT '-1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
